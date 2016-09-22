@@ -1,5 +1,3 @@
-'use strict'
-
 const stockFetch = require('../lib/stockfetch');
 const assert = require('assert');
 
@@ -25,7 +23,7 @@ describe('stockfetch e2e', function () {
 		};
 
 		//when
-		const fetch = stockFetch(fetchSymbols, fetchPrices, prepareReport);
+		const fetch = stockFetch({fetchSymbols, fetchPrices, prepareReport});
 		
 		//then
 		const reportPromise = fetch('someFile');
