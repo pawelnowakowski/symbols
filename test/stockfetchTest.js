@@ -1,5 +1,6 @@
 const stockFetch = require('../lib/stockfetch');
 const assert = require('assert');
+const coMocha = require('co-mocha');
 
 describe('stockfetch e2e', function () {
 	it('happy path', function *() {

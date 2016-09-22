@@ -1,14 +1,17 @@
 const fetchSymbols = require('../../lib/file/fetchsymbols');
 const assert = require('assert');
 const td = require('testdouble');
+const coMocha = require('co-mocha');
 
 describe('fetch symbols', function () {
 
 	it('[mocking library] reads file and parses function', function *() {
+
+		//given
 		const readFile = td.function('readFile');
 		const parseSymbols = td.function('parseSymbols');
-		td.when(readFile()).thenReturn(Promise.resolve(['AAPL GOOD']));
-		td.when(parseSymbols()).thenReturn(Promise.resolve(['AAPL', 'GOOD']));
+		td.when(readFile('someFile')).thenReturn(Promise.resolve('AAPL GOOD'));
+		td.when(parseSymbols('AAPL GOOD')).thenReturn(Promise.resolve(['AAPL', 'GOOD']));
 
 		const fetch = fetchSymbols({readFile, parseSymbols});
 		
@@ -16,8 +19,6 @@ describe('fetch symbols', function () {
 		const symbols = yield fetch('someFile');
 
 		//then
-		td.verify(readFile('someFile'));
-		td.verify(parseSymbols(['AAPL', 'GOOD']));
 		assert.deepEqual(symbols, ['AAPL', 'GOOD']);
 	});
 
@@ -28,7 +29,7 @@ describe('fetch symbols', function () {
 		const readFile = function (fileName) {
 			expectedAssertionCount++;
 			assert.equal(fileName, 'someFile');
-			return Promise.resolve(['AAPL GOOD']);
+			return Promise.resolve('AAPL GOOD');
 		};
 
 		const parseSymbols = function (line) {
