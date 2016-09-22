@@ -18,7 +18,7 @@ describe('stockfetch e2e', function () {
 		};
 		const prepareReport = function (symbolsAndPrices) {
 			expectedAssertionCount++;
-			assert.deepEqual(symbolsAndPrices, [['AAPL', 10], ['GOOD',20]]);
+			assert.deepEqual(symbolsAndPrices, [['AAPL', 10], ['GOOD', 20]]);
 			return 'report';
 		};
 
