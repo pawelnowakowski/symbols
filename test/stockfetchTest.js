@@ -2,7 +2,7 @@ const stockFetch = require('../lib/stockfetch');
 const assert = require('assert');
 
 describe('stockfetch e2e', function () {
-	it('happy path', function (done) {
+	it('happy path', function *() {
 		
 		//given
 		let expectedAssertionCount = 0;
@@ -26,13 +26,9 @@ describe('stockfetch e2e', function () {
 		const fetch = stockFetch({fetchSymbols, fetchPrices, prepareReport});
 		
 		//then
-		const reportPromise = fetch('someFile');
-
-		reportPromise.then(function (report) {
-			expectedAssertionCount++;
-			assert.equal(report, 'report');
-			assert.equal(expectedAssertionCount, 4, 'expected number of assertions');
-			done();
-		}).catch(done);
+		const reportPromise = yield fetch('someFile');
+		expectedAssertionCount++;
+		assert.equal(reportPromise, 'report');
+		assert.equal(expectedAssertionCount, 4, 'expected number of assertions');
 	});
 });

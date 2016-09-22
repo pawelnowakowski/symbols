@@ -28,12 +28,5 @@ describe('fetch symbols', function () {
 		expectedAssertionCount++;
 		assert.deepEqual(symbols, ['AAPL', 'GOOD']);
 		assert.equal(expectedAssertionCount, 3, 'expected number of assertions');
-
-		/*symbolFetch.then(function (lines) {
-			expectedAssertionCount++;
-			assert.deepEqual(lines, ['AAPL', 'GOOD']);
-			assert.equal(expectedAssertionCount, 3, 'expected number of assertions');
-			done();
-		}).catch(done);*/
 	});
 });
