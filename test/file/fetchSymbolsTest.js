@@ -1,4 +1,4 @@
-const fetchSymbols = require('../lib/fetchsymbols');
+const fetchSymbols = require('../../lib/file/fetchsymbols');
 const assert = require('assert');
 
 describe('fetch symbols', function () {
