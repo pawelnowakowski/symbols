@@ -2,7 +2,6 @@ const assert = require('assert');
 const coMocha = require('co-mocha');
 const fetchPrices = require('../../lib/http/fetchPrices');
 
-
 describe('fetch prices test', function () {
 	it('fetch prices', function *() {
 
@@ -21,7 +20,7 @@ describe('fetch prices test', function () {
 		};
 
 		const fetch = fetchPrices({readAllPrices, parseCurrentPrices});
-		
+
 		//when
 		const symbols = yield fetch(['GOOG', 'AAPL']);
 
