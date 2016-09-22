@@ -1,8 +1,11 @@
 const fetchSymbols = require('../../lib/file/fetchsymbols');
 const assert = require('assert');
+const coMocha = require('co-mocha');
 
 describe('fetch symbols', function () {
-	it('', function (done) {
+	it('fetch symbols', function *() {
+
+		//given
 		let expectedAssertionCount = 0;
 		const readFile = function (fileName) {
 			expectedAssertionCount++;
@@ -16,17 +19,21 @@ describe('fetch symbols', function () {
 			return Promise.resolve(['AAPL', 'GOOD']);
 		};
 
-		//when
 		const fetch = fetchSymbols({readFile, parseSymbols});
 		
-		//then
-		const symbolFetch = fetch('someFile');
+		//when
+		const symbols = yield fetch('someFile');
 
-		symbolFetch.then(function (lines) {
+		//then
+		expectedAssertionCount++;
+		assert.deepEqual(symbols, ['AAPL', 'GOOD']);
+		assert.equal(expectedAssertionCount, 3, 'expected number of assertions');
+
+		/*symbolFetch.then(function (lines) {
 			expectedAssertionCount++;
 			assert.deepEqual(lines, ['AAPL', 'GOOD']);
 			assert.equal(expectedAssertionCount, 3, 'expected number of assertions');
 			done();
-		}).catch(done);
+		}).catch(done);*/
 	});
 });
