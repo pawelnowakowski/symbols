@@ -1,10 +1,11 @@
 const assert = require('assert');
 const readFile = require('../../lib/file/readFile');
 const coMocha = require('co-mocha');
+const fs = require('fs');
 
 describe('read file', function () {
 	it('[integration test] should get file content', function *() {
-		const read = readFile();
+		const read = readFile({fs});
 
 		const result = yield read('./symbols');
 
@@ -12,7 +13,7 @@ describe('read file', function () {
 	});
 
 	it('[integration test] should fail on nonexistent file', function *() {
-		const read = readFile();
+		const read = readFile({fs});
 
 		try {
 			yield read('./symbols_invalid');
